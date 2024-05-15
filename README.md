@@ -1,42 +1,12 @@
-# Content v2 Minimal Starter
+# Rory's Pages
 
-Look at the [Content documentation](https://content.nuxt.com/) to learn more.
+A website for handsomes and beauties to get to know about Rory powered by [Nuxt Content](https://content.nuxt.com/).
 
-## Setup
+## Features
 
-Make sure to install the dependencies:
+- [ ] Customized Navigations
+- [ ] Overwrite basic markdown components
 
-```bash
-# yarn
-yarn install
+## Contents
 
-# npm
-npm install
-
-# pnpm
-pnpm install
-```
-
-## Development Server
-
-Start the development server on http://localhost:3000
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Checkout the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- [ ] About
