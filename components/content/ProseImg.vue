@@ -1,5 +1,5 @@
 <template>
-   <component class="border shadow-lg rounded-lg mb-12 dark:border-gray-800" :is="imgComponent" :src="refinedSrc" :alt="alt" :width="width" :height="height" />
+   <component class="border shadow-lg rounded-lg my-8 dark:border-gray-800" :is="imgComponent" :src="refinedSrc" :alt="alt" :width="width" :height="height" />
 </template>
  
 <script setup lang="ts">
