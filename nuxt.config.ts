@@ -50,11 +50,11 @@ export default defineNuxtConfig({
     storageKey: 'nuxt-color-mode'
   },
   content: {
-    // experimental: {
-    //   search: true
-    // },
+    experimental: {
+      search: true
+    },
     markdown: {
-      toc: { depth: 2, searchDepth: 2 },
+      toc: { depth: 3, searchDepth: 3 },
       remarkPlugins: {
         // Override remark-emoji options
         // 'remark-emoji': {
