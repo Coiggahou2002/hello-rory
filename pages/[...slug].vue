@@ -1,5 +1,28 @@
 <template>
-  <main>
-    <ContentDoc />
-  </main>
+  <div class="page_bg max-w-screen-md ">
+    <main class="flex flex-col">
+      <div class="relative">
+        <ContentDoc>
+          <template v-slot="{ doc }">
+            <TocNav class="tocnav absolute ml-4" :toc="doc.body?.toc" />
+            <article>
+              <ContentRenderer :value="doc" />
+            </article>
+          </template>
+          <template #not-found>
+            <h1>Document not found</h1>
+          </template>
+        </ContentDoc>
+        <div class="h-64 w-full bg-transparent"></div>
+      </div>
+    </main>
+  </div>
 </template>
+
+<style scoped lang="scss">
+.tocnav {
+  position: fixed;
+  transform: translateX(-240px) translateY(100px);
+  width: 200px;
+}
+</style>
