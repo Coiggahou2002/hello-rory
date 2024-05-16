@@ -11,7 +11,16 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     'nuxt-svgo',
     '@vueuse/nuxt',
+    '@hypernym/nuxt-anime',
+    'dayjs-nuxt',
+    '@pinia/nuxt',
   ],
+  dayjs: {
+    locales: ['en', 'fr'],
+    plugins: ['relativeTime', 'utc', 'timezone'],
+    defaultLocale: 'en',
+    defaultTimezone: 'America/New_York',
+  },
   googleFonts: {
     // Options
     download: true,
