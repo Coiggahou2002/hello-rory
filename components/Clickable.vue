@@ -1,5 +1,5 @@
 <template>
-   <div class="clickable">
+   <div class="clickable" @click="gotoHref">
       <div class="flex justify-start items-center">
          <span :class="slots.icon ? 'mr-1' : ''">
             <slot name="icon"></slot>
@@ -29,6 +29,12 @@ const props = withDefaults(defineProps<ClickableProps>(), {
    href: '',
 });
 const slots = useSlots();
+
+const gotoHref = () => {
+   if (props.href) {
+      window.open(`${new URL(props.href)}`, '_blank')
+   }
+}
 
 </script>
 

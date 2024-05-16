@@ -2,8 +2,51 @@
 const colorMode = useColorMode()
 useGlobalSearchModal();
 </script>
+
 <template>
-  <div>
-    <NuxtPage />
+  <div class="flex flex-col justify-center items-center">
+    <Nav />
+    <ColorModeSwitch :mode="colorMode.preference" class="fixed right-1 top-1"/>
+    <ClientOnly>
+      <SearchModal/>
+    </ClientOnly>
+    <!-- <main class="w-full max-w-screen-lg"> -->
+    <main class="w-full max-w-screen-md">
+      <NuxtPage />
+    </main>
   </div>
 </template>
+<style>
+html {
+  /* font-family: 'Fira Sans Condensed' !important; */
+  font-family: 'Fira Sans', sans-serif !important;
+  /* font-family: 'Crimson Pro' !important; */
+  /* font-family: 'Ubuntu Condensed' !important; */
+  /* font-family: 'Roboto' !important; */
+  /* font-family: 'Ubuntu' !important; */
+  /* font-family: 'Lato' !important; */
+  /* font-family: 'Barlow' !important; */
+  font-size: 18px;
+  scroll-behavior: smooth;
+  @apply text-slate-700
+}
+
+body {
+  @apply dark:bg-gray-800 bg-white;
+}
+
+h1, h2, h3, h4, p, span {
+   /* @apply text-slate-600 dark:text-slate-300; */
+   @apply text-gray-600 dark:text-gray-300;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+</style>
