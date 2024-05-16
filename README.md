@@ -6,6 +6,7 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
 
 - [ ] Customized Navigations
 - [ ] Overwrite basic markdown components
+- [ ] Sync toc-nav highlight item with content position
 
 ## Contents
 
@@ -20,3 +21,5 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
 - [@nuxtjs/google-fonts](https://google-fonts.nuxtjs.org/)
 - [nuxt-svgo](https://nuxt.com/modules/nuxt-svgo)
 - [@vueuse/nuxt](https://vueuse.org/nuxt/README.html)
+- [dayjs-nuxt](https://nuxt.com/modules/dayjs)
+- [@hypernym/nuxt-anime](https://nuxt.com/modules/animejs)
