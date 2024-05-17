@@ -34,7 +34,7 @@ jobs:
           rm: true
           overwrite: true
 
-      - name: Use PM2 to start node service on remote server
+      - name: Start node service on remote server
         uses: JimCronqvist/action-ssh@master
         with:
           hosts: ${{ secrets.DC_USER }}@${{ secrets.DC_HOST }}:22
@@ -46,4 +46,4 @@ jobs:
             cd /home/cj/homepage/
             source $HOME/.nvm/nvm.sh
             nvm use 20
-            node ./.output/server/index.mjs
+            PORT=6006 node ./.output/server/index.mjs
