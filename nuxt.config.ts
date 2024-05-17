@@ -25,17 +25,13 @@ export default defineNuxtConfig({
     // Options
     download: true,
     families: {
-      Roboto: true,
       Barlow: {
         wght: [200, 400, 600, 800],
         normal: 400,
         regular: 400,
       },
-      'Ubuntu Condensed': [400],
       'Fira Sans': [200, 300, 400, 500, 600, 700],
-      'Fira Sans Condensed': [200, 300, 400, 500, 600, 700],
-      'Fira Sans Extra Condensed': [400, 500, 600, 700],
-      Ubuntu: [300, 400, 500, 700],
+      'Fira Sans Condensed': [400, 500, 600, 700],
     }
   },
   colorMode: {
