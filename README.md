@@ -2,11 +2,18 @@
 
 A website for handsomes and beauties to get to know about Rory powered by [Nuxt Content](https://content.nuxt.com/).
 
-## Features
+## Features Plan
 
-- [ ] Customized Navigations
-- [ ] Overwrite basic markdown components
+- [x] 🌛 Dark Mode
+- [x] 🌍 Customized Navigations
+- [x] 🔧 Overwrite basic markdown components
+- [x] 🔍 Content Search
+- [x] 📄 TOC for articles
+- [ ] Refactor nav styles
 - [ ] Sync toc-nav highlight item with content position
+- [ ] Responsive Adaptation for mobile phone
+- [ ] Add scroll-triggered animations and more UI elements
+- [ ] Add connection-visualized graph
 
 ## Contents
 
