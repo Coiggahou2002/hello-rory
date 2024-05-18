@@ -1,25 +1,24 @@
+
 const useGlobalSearchModal = () => {
     const searchStore = useSearchStore();
-    // searchStore.init();
 
     const {
         isSearchModalOpen,
         activeResultIndex,
         searchValue,
-        searchResults,
+        results
     } = storeToRefs(searchStore);
 
     watch(searchValue, (val) => {
-        if (val === "") {
-            return;
+        if (val == "") {
+            return
         }
-        searchContent(val).then((res) => {
-            // computed ref
-            searchResults.value = res;
-        }).catch((err) => {
+        searchContent(val).then(res => {
+            results.value = res;
+        }).catch(err => {
             console.error(err);
         });
-    })
+    });
 
     const {
         openSearchModal,
@@ -27,9 +26,9 @@ const useGlobalSearchModal = () => {
     } = searchStore;
 
     const curSelectedBlog = computed(() => {
-        return searchResults.value?.[activeResultIndex.value];
+        return results.value?.[activeResultIndex.value];
     })
-    
+
     const router = useRouter();
     const focusOnSearchInput = () => {
         const el = document.getElementById('search_modal_input');
@@ -66,7 +65,7 @@ const useGlobalSearchModal = () => {
     return {
         searchValue,
         activeResultIndex,
-        results: searchResults,
+        results: results,
         isOpen: isSearchModalOpen,
         openModal,
         closeModal,

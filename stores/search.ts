@@ -2,15 +2,15 @@ interface GlobalState {
     isSearchModalOpen: boolean;
     activeResultIndex: number;
     searchValue: string;
-    searchResults: any[];
+    results: unknown[];
 }
 export const useSearchStore = defineStore('global', {
     state: (): GlobalState => {
         return {
             isSearchModalOpen: false,
             searchValue: '',
+            results: [],
             activeResultIndex: 0,
-            searchResults: [],
         }
     },
     actions: {
