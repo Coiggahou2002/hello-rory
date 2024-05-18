@@ -15,6 +15,24 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
 - [ ] Add scroll-triggered animations and more UI elements
 - [ ] Add connection-visualized graph
 
+### Markdown Components Override
+
+- [x] p
+- [x] h1
+- [x] h2
+- [x] h3
+- [x] ul
+- [x] ol
+- [x] li
+- [x] code
+- [x] pre
+- [x] img
+- [ ] h4
+- [ ] h5
+- [ ] h6
+- [ ] table
+- [ ] quote
+
 ## Contents
 
 - [ ] About
