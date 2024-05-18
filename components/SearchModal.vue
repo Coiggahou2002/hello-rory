@@ -4,7 +4,7 @@
          <div class="search_modal">
             <div class="search_modal_inputw flex justify-center items-center">
                <SearchIcon class="h-5 w-5 mr-2" filled :font-controlled="false" />
-               <input id="search_modal_input" class="search_modal_input" placeholder="Search any contents..."
+               <input autocomplete="off" id="search_modal_input" class="search_modal_input" placeholder="Search any contents..."
                   v-model="searchValue" @keyup="handleKeyUp" @keydown="handleKeyDown" />
             </div>
             <div class="search_modal_result">
