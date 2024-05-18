@@ -7,13 +7,13 @@
                <input autocomplete="off" id="search_modal_input" class="search_modal_input" placeholder="Search any contents..."
                   v-model="searchValue" @keyup="handleKeyUp" @keydown="handleKeyDown" />
             </div>
-            <div class="search_modal_result">
-               <div v-for="(r, idx) in results" :class="['search_modal_result_item', {
-                  'selected': activeResultIndex === idx
-               }]" @click="gotoBlog">
-                  <div class="search_modal_result_item_title">{{ r.title }}</div>
-                  <div class="search_modal_result_item_desc">{{ r.content }}</div>
-               </div>
+            <div ref="SearchModalResultRef" class="search_modal_result" v-if="searchValue">
+                  <div v-for="(r, idx) in results" :class="['search_modal_result_item', {
+                     'selected': activeResultIndex === idx
+                  }]" @click="gotoBlog">
+                     <div class="search_modal_result_item_title">{{ r.title }}</div>
+                     <div class="search_modal_result_item_desc">{{ r.content }}</div>
+                  </div>
             </div>
          </div>
       </div>
@@ -23,9 +23,9 @@
 <script setup lang="ts">
 import SearchIcon from "@/assets/icons/search.svg";
 
-const { searchValue, closeModal, openModal, isOpen, gotoSelectedBlog, activeResultIndex, results } = useGlobalSearchModal();
+const SearchModalResultRef = ref<HTMLDivElement | null>(null);
 
-const router = useRouter();
+const { searchValue, closeModal, openModal, isOpen, gotoSelectedBlog, activeResultIndex, results } = useGlobalSearchModal();
 
 const gotoBlog = () => {
    gotoSelectedBlog();
@@ -51,6 +51,12 @@ const handleKeyUp = (e: KeyboardEvent) => {
       if (e.key === "ArrowDown") {
          activeResultIndex.value = (activeResultIndex.value + 1) % results.value.length;
       }
+      nextTick(() => {
+         SearchModalResultRef.value?.querySelector("div.selected")?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+         });
+      })
    }
    if (e.key === "Enter") {
       gotoBlog();
@@ -87,12 +93,10 @@ const handleKeyUp = (e: KeyboardEvent) => {
       }
    }
 
-   //   cursor-pointer hover:bg-gray-800
-   //   border-t
-   //   border-gray-100 dark:border-gray-700
    &_result {
+      max-height: 50vh;
+      overflow-y: scroll;
 
-      // @apply pb-1;
       &_item {
          @apply px-4 m-1 rounded-md py-2 text-gray-800 dark:text-gray-200 hover:dark:text-gray-100 cursor-pointer;
 
