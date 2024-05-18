@@ -46,7 +46,14 @@ onMounted(() => {
 
 <template>
    <section class="w-full flex-col">
-      <div class="flex">
+      <div class="flex flex-col md:flex-row-reverse">
+         <!-- avatar -->
+         <div class="basis-1/3 grow-0">
+            <div class="h-32 w-32 md:h-64 md:w-64 mt-12 mx-auto rounded-full overflow-hidden border-dashed border-2 dark:border-gray-700">
+               <img class="dark:brightness-75" src="@/assets/images/roryc.png"/>
+            </div>
+         </div>
+         <!-- introduction -->
          <article class="pr-4 basis-2/3 grow-0">
             <h1 class="text-title font-bold  mt-12 mb-8 select-none cursor-pointer" :style="{
             }" @click="handleNameClick">Rory Cai</h1>
@@ -204,11 +211,6 @@ onMounted(() => {
                </li>
             </ul>
          </article>
-         <div class="basis-1/3 grow-0">
-            <div class="mt-12 rounded-full overflow-hidden border-dashed border-2 dark:border-gray-700">
-               <img class="dark:brightness-75" src="@/assets/images/roryc.png"/>
-            </div>
-         </div>
       </div>
 
       <!-- placeholder -->

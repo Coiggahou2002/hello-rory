@@ -11,7 +11,7 @@ useGlobalSearchModal();
       <SearchModal/>
     </ClientOnly>
     <!-- <main class="w-full max-w-screen-lg"> -->
-    <main class="w-full max-w-screen-md">
+    <main class="w-full max-w-screen-md px-8 lg:px-0">
       <NuxtPage />
     </main>
   </div>

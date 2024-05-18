@@ -1,11 +1,11 @@
 <template>
-  <div class="page_bg max-w-screen-md ">
+  <div class="page_bg max-w-screen-md">
     <main class="flex flex-col">
       <div class="relative">
         <ContentDoc>
           <template v-slot="{ doc }">
-            <TocNav class="tocnav absolute ml-4" :toc="doc.body?.toc" />
-            <article>
+            <TocNav class="tocnav absolute ml-4 invisible xl:visible" :toc="doc.body?.toc" />
+            <article >
               <ContentRenderer :value="doc" />
             </article>
           </template>
