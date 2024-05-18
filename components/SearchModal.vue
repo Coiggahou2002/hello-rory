@@ -61,7 +61,9 @@ const handleKeyUp = (e: KeyboardEvent) => {
 
 <style scoped lang="scss">
 .mask {
-   @apply bg-gray-200/75 dark:bg-gray-950/50 fixed top-0 left-0 right-0 bottom-0 z-50 backdrop-blur transition-all;
+   @apply bg-gray-200/75 dark:bg-gray-600/50 fixed top-0 left-0 right-0 bottom-0 z-50 
+   backdrop-blur-lg
+   transition-all;
 }
 
 .search_modal {
