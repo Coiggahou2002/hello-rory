@@ -1,8 +1,9 @@
 <template>
-  <div class="blog_link_item" @click="gotoBlog">
+  <div class="blog_link_item flex items-baseline" @click="gotoBlog">
     <span class="blog_link_item_title">
       {{ blog.title }}
     </span>
+    <span class="grow"></span>
     <span class="blog_link_item_date">{{ displayDate }}</span>
   </div>
 </template>
@@ -19,7 +20,11 @@ const props = withDefaults(defineProps<BlogLinkProps>(), {
 const dayjs = useDayjs();
 
 
+const { locale } = useI18n();
 const displayDate = computed(() => {
+  if (locale.value === 'zh') {
+    return dayjs(props.blog.time).format('MM-DD');
+  }
   return dayjs(props.blog.time).format('MMM D');
 })
 
@@ -37,16 +42,16 @@ onMounted(() => {
 <style scoped lang="scss">
 .blog_link {
   &_item {
-    @apply my-4  transition-all cursor-pointer text-xl
-    opacity-50 hover:opacity-100;
+    @apply my-3  transition-all cursor-pointer text-xl
+    opacity-75 hover:opacity-100;
 
     &_title {
-      @apply text-gray-800 
-      dark:text-white
+      @apply text-gray-800 font-normal 
+      dark:text-white text-base md:text-xl
     }
 
     &_date {
-      @apply ml-2 text-sm text-gray-400 font-light;
+      @apply ml-2 text-xs md:text-sm text-gray-600 dark:text-gray-400 font-light min-w-12 text-right;
     }
   }
 }

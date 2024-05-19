@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-full flex-col flex">
     <ContentList path="/" v-slot="{ list }">
       <div v-for="article in list" :key="article._path">
         <BlogLink :blog="article"/>
