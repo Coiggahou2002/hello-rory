@@ -5,7 +5,8 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' }
   },
   devtools: { enabled: true },
-  modules: ['@nuxt/content',
+  modules: [
+    '@nuxt/content',
     "@nuxtjs/tailwindcss",
     '@nuxtjs/color-mode',
     '@nuxtjs/google-fonts',
@@ -14,6 +15,7 @@ export default defineNuxtConfig({
     '@hypernym/nuxt-anime',
     'dayjs-nuxt',
     '@pinia/nuxt',
+    "@nuxtjs/i18n"
   ],
   dayjs: {
     locales: ['en', 'fr'],
@@ -44,6 +46,19 @@ export default defineNuxtConfig({
     classPrefix: '',
     // classSuffix: '-ode',
     storageKey: 'nuxt-color-mode'
+  },
+  i18n: {
+    defaultLocale: 'en',
+    locales: [
+      {
+        code: 'en',
+        name: 'En'
+      },
+      {
+        code: 'zh',
+        name: '中文'
+      },
+    ]
   },
   content: {
     experimental: {

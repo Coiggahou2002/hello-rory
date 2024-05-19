@@ -57,7 +57,7 @@ onMounted(() => {
          <article class="pr-4 basis-2/3 grow-0">
             <h1 class="text-title font-bold  mt-12 mb-8 select-none cursor-pointer" :style="{
             }" @click="handleNameClick">Rory Cai</h1>
-            <h2 class="selfintro_text pb-6 font-light">Hey, I am Rory Cai, a full-stack developer.</h2>
+            <h2 class="selfintro_text pb-6 font-light">{{ $t('hello') }}, {{ $t('iam') }} Rory Cai, a full-stack developer.</h2>
             <div class="selfintro_text font-light">
                <span>Graduated from</span>
                <Clickable text="Harbin Institude of Technology" href="https://www.hitsz.edu.cn/">
@@ -93,7 +93,7 @@ onMounted(() => {
 
 
             <!-- TechStacks -->
-            <p key="tech_title" class="selfintro_text pt-10 font-normal">An overview of my technical stacks:</p>
+            <p key="tech_title" class="selfintro_text pt-10 font-normal">An overview of my {{ $t('technical_stacks') }}:</p>
             <ul>
                <li class="tech_item">
                   <span class="tech_item_prefix">#</span>

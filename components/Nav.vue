@@ -2,20 +2,22 @@
    <nav class="select-none w-full max-w-screen-md px-8 lg:px-0">
       <ul class="flex justify-between items-center gap-1 pb-4 pt-12">
          <li class="mr-4">
-            <NuxtLink class="nav_item" to="/">
-               Me
+            <NuxtLink class="nav_item" :to="localePath('/')">
+               {{ $t('me') }}
             </NuxtLink>
          </li>
          <li class="">
-            <NuxtLink class="nav_item" to="/blogs">
-               Blogs
+            <NuxtLink class="nav_item" :to="localePath('/blogs')">
+               {{ $t('blogs') }}
             </NuxtLink>
          </li>
          <span class="grow shrink-0"></span>
+         <LangSwitch class="mr-1" />
+         <ColorModeSwitch :mode="colorMode.preference" class="mr-1" />
          <li class="invisible lg:visible">
             <div class="search_btn flex items-center justify-start" @click="dispatchOpenModal" ref="SearchBtnRef">
                <SearchIcon id="nav_search_icon" class="h-4 w-4 mr-2" filled :font-controlled="false" />
-               <span>Search</span>
+               <span>{{ $t('search') }}</span>
             </div>
          </li>
       </ul>
@@ -26,6 +28,8 @@
 import SearchIcon from "@/assets/icons/search.svg";
 import type { NavItem } from '@nuxt/content/types';
 const { openModal } = useGlobalSearchModal();
+const colorMode = useColorMode()
+const localePath = useLocalePath();
 
 const SearchBtnRef = ref<HTMLLIElement | null>(null);
 const { $anime } = useNuxtApp();

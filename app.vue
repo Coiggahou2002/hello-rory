@@ -1,12 +1,10 @@
 <script setup lang="ts">
-const colorMode = useColorMode()
 useGlobalSearchModal();
 </script>
 
 <template>
   <div class="flex flex-col justify-center items-center">
     <Nav />
-    <ColorModeSwitch :mode="colorMode.preference" class="fixed right-1 top-1"/>
     <ClientOnly>
       <SearchModal/>
     </ClientOnly>
