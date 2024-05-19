@@ -1,19 +1,25 @@
 <template>
    <nav class="select-none w-full max-w-screen-md px-8 lg:px-0">
       <ul class="flex justify-between items-center gap-1 pb-4 pt-12">
-         <li class="mr-6" v-for="n in NAVS" :key="n.text">
-            <NuxtLink class="nav_item" :to="localePath(n.to)">
-            {{ $t(n.text).toUpperCase() }}
-            </NuxtLink>
-         </li>
+         <ClientOnly>
+            <template v-if="screenSize === EScreenSizeType.PHONE">
+               <li class="" @click="openMenuMask">
+                  <SvgoMenu class="h-6 w-6 text-gray-300 dark:text-gray-600 " :font-controlled="false" />
+               </li>
+               <NavMenuMask :navs="NAVS" v-model="showMenuMask" />
+            </template>
+            <template v-else>
+               <NavItem v-for="n in NAVS" :nav="n" />
+            </template>
+         </ClientOnly>
          <span class="grow shrink-0"></span>
          <LangSwitch class="mr-1 text-gray-300 dark:text-gray-600" />
          <ColorModeSwitch :mode="colorMode.preference" class="mr-1" />
-         <li class="invisible lg:visible">
+         <li class="hidden lg:block">
             <div class="search_btn flex items-center justify-start" @click="dispatchOpenModal" ref="SearchBtnRef">
                <SvgoSearch id="nav_search_icon" class="h-4 w-4 mr-2" filled :font-controlled="false" />
                <span>{{ $t('search') }}</span>
-               <SvgoCommand class="h-4 w-4 ml-2 " filled  :font-controlled="false" />
+               <SvgoCommand class="h-4 w-4 ml-2 " filled :font-controlled="false" />
                <span>K</span>
             </div>
          </li>
@@ -26,7 +32,14 @@ import type { Navigations } from '~/types/profile';
 const { openModal } = useGlobalSearchModal();
 const colorMode = useColorMode()
 const localePath = useLocalePath();
+const { screenSize } = useScreenSize();
 const { t } = useI18n();
+
+const showMenuMask = ref(false);
+const openMenuMask = () => {
+   showMenuMask.value = true;
+}
+
 
 const NAVS: Navigations.NavItem[] = [
    { text: 'me', to: '/' },
@@ -80,47 +93,10 @@ const dispatchOpenModal = () => {
 
 <style lang="scss" scoped>
 .search_btn {
-   @apply w-32 cursor-pointer py-2 px-2 bg-gray-100/75 dark:bg-gray-900/50 rounded-lg text-sm text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900/75 ;
+   @apply w-32 cursor-pointer py-2 px-2 bg-gray-100/75 dark:bg-gray-900/50 rounded-lg text-sm text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900/75;
 
    span {
       @apply text-gray-400;
-   }
-}
-
-.nav_item {
-   //   border-b-2 border-b-transparent hover:border-gray-400
-   // font-family: 'Fira Sans Condensed' !important;
-   // font-family: 'Barlow' !important;
-   // font-family: 'Barlow' !important;
-   font-family: 'Barlow Semi Condensed' !important;
-
-   @apply text-xl text-gray-300 hover:text-gray-800 transition-all dark:text-gray-600 dark:hover:text-gray-300 py-2 my-1 tracking-normal;
-   // decoration-gray-200 dark:decoration-gray-700;
-
-   position: relative;
-
-   &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      z-index: -1;
-      bottom: 8px;
-      left: 3px;
-      right: 3px;
-      height: 12px;
-      @apply bg-gray-200 dark:bg-gray-600;
-      transition: width 0.3s;
-      opacity: 0;
-   }
-
-   &.router-link-exact-active {
-      //  @apply text-gray-800 dark:text-gray-300;
-      @apply text-gray-800 dark:text-gray-300 font-semibold;
-
-      //  underline underline-offset-1 decoration-8 ;
-      &::after {
-         opacity: 1;
-      }
    }
 }
 </style>

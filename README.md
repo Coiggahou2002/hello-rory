@@ -9,9 +9,11 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
 - [x] 🔧 Overwrite basic markdown components
 - [x] 🔍 Content Search
 - [x] 📄 TOC for articles
+- [ ] Custom text selection color
 - [ ] Refactor nav styles
 - [ ] Sync toc-nav highlight item with content position
 - [ ] Responsive Adaptation for mobile phone
+    - [x] Collapse navigation bar to menu button
 - [ ] Add scroll-triggered animations and more UI elements
 - [ ] Add connection-visualized graph
 - [ ] i18n
