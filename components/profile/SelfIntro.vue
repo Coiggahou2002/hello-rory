@@ -21,10 +21,11 @@ onMounted(() => {
 <template>
    <h1 class="text-title font-bold  mt-12 mb-8 select-none cursor-pointer" :style="{
    }" @click="handleNameClick">Rory Cai</h1>
-   <h2 class="selfintro_text pb-6 font-light">{{ $t('hello') }}, {{ $t('iam') }} Rory Cai, {{
+   <span class="selfintro_text pb-6 font-normal">{{ $t('hello') }}, {{ $t('iam') }} Rory Cai, {{
       $t('a_fullstack_developer') }}
-   </h2>
-   <div class="selfintro_text font-light">
+      <span>.</span>
+   </span>
+   <div class="selfintro_text font-normal">
       <span>{{ capitalize($t('graduated_from')) }}</span>
       <Clickable :text="$t('hit')" href="https://www.hitsz.edu.cn/">
          <template #icon>
@@ -33,22 +34,22 @@ onMounted(() => {
       </Clickable>
       <span>.</span>
    </div>
-   <div class="selfintro_text font-light">
+   <div class="selfintro_text font-normal">
       <template v-if="locale === 'zh'">
          <span>目前任职</span>
-         <ProfileTechStackTag text="腾讯" href="https://www.tencent.com/zh-cn/" icon="ten"/>
+         <ProfileTechStackTag text="腾讯" href="https://www.tencent.com/zh-cn/" icon="ten" />
          <span>前端开发工程师</span>
       </template>
       <template v-if="locale === 'en'">
          <span>Currently working at</span>
-         <ProfileTechStackTag text="Tencent" href="https://www.tencent.com/en-us" icon="ten"/>
+         <ProfileTechStackTag text="Tencent" href="https://www.tencent.com/en-us" icon="ten" />
          <span>as a frontend developer.</span>
       </template>
    </div>
-   <div class="selfintro_text font-light">
+   <div class="selfintro_text font-normal">
       <span>Fans of</span>
-      <ProfileTechStackTag text="Nuxt" href="https://nuxt.com" icon="nuxt"/>
-      <ProfileTechStackTag text="Vite" href="https://vitejs.dev" icon="vite"/>
+      <ProfileTechStackTag text="Nuxt" href="https://nuxt.com" icon="nuxt" />
+      <ProfileTechStackTag text="Vite" href="https://vitejs.dev" icon="vite" />
       <span>.</span>
    </div>
 </template>
@@ -57,6 +58,10 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .selfintro_text {
-   @apply text-lg text-gray-600 my-2 leading-8;
+   @apply text-lg text-gray-600 dark:text-gray-300 my-2 leading-8;
+}
+
+.text-title {
+   @apply text-4xl text-gray-800 dark:text-white;
 }
 </style>

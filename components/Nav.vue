@@ -1,18 +1,13 @@
 <template>
    <nav class="select-none w-full max-w-screen-md px-8 lg:px-0">
       <ul class="flex justify-between items-center gap-1 pb-4 pt-12">
-         <li class="mr-4">
-            <NuxtLink class="nav_item" :to="localePath('/')">
-               {{ $t('me') }}
-            </NuxtLink>
-         </li>
-         <li class="">
-            <NuxtLink class="nav_item" :to="localePath('/blogs')">
-               {{ $t('blogs') }}
+         <li class="mr-6" v-for="n in NAVS" :key="n.text">
+            <NuxtLink class="nav_item" :to="localePath(n.to)">
+            {{ $t(n.text).toUpperCase() }}
             </NuxtLink>
          </li>
          <span class="grow shrink-0"></span>
-         <LangSwitch class="mr-1" />
+         <LangSwitch class="mr-1 text-gray-300 dark:text-gray-600" />
          <ColorModeSwitch :mode="colorMode.preference" class="mr-1" />
          <li class="invisible lg:visible">
             <div class="search_btn flex items-center justify-start" @click="dispatchOpenModal" ref="SearchBtnRef">
@@ -27,10 +22,19 @@
 </template>
 
 <script lang="ts" setup>
-import type { NavItem } from '@nuxt/content/types';
+import type { Navigations } from '~/types/profile';
 const { openModal } = useGlobalSearchModal();
 const colorMode = useColorMode()
 const localePath = useLocalePath();
+const { t } = useI18n();
+
+const NAVS: Navigations.NavItem[] = [
+   { text: 'me', to: '/' },
+   { text: 'blogs', to: '/blogs' },
+   { text: 'uses', to: '/uses' },
+   { text: 'journal', to: '/journal' },
+];
+
 
 const SearchBtnRef = ref<HTMLLIElement | null>(null);
 const { $anime } = useNuxtApp();
@@ -85,8 +89,12 @@ const dispatchOpenModal = () => {
 
 .nav_item {
    //   border-b-2 border-b-transparent hover:border-gray-400
-   font-family: 'Fira Sans' !important;
-   @apply text-xl text-gray-300 hover:text-gray-800 transition-all dark:text-gray-600 dark:hover:text-gray-300 py-2 my-1;
+   // font-family: 'Fira Sans Condensed' !important;
+   // font-family: 'Barlow' !important;
+   // font-family: 'Barlow' !important;
+   font-family: 'Barlow Semi Condensed' !important;
+
+   @apply text-xl text-gray-300 hover:text-gray-800 transition-all dark:text-gray-600 dark:hover:text-gray-300 py-2 my-1 tracking-normal;
    // decoration-gray-200 dark:decoration-gray-700;
 
    position: relative;
@@ -99,8 +107,8 @@ const dispatchOpenModal = () => {
       bottom: 8px;
       left: 3px;
       right: 3px;
-      height: 14px;
-      @apply bg-gray-200 dark:bg-gray-700;
+      height: 12px;
+      @apply bg-gray-200 dark:bg-gray-600;
       transition: width 0.3s;
       opacity: 0;
    }

@@ -9,3 +9,10 @@ export namespace Profile {
         icon: string;
     }
 }
+
+export namespace Navigations {
+    export interface NavItem {
+        text: string;
+        to: string;
+    }
+}

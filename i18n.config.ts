@@ -18,17 +18,20 @@ export default defineI18nConfig(() => ({
             a: 'a',
             a_fullstack_developer: '@:a @:fullstack @:developer',
             search_any_contents: 'Search any contents',
+            overview_of_techstacks: 'An overview of my @:technical_stacks',
             web: 'web',
             backend: 'backend',
             mobile: 'mobile',
             scripting: 'scripting',
             database: 'database',
             cloud_native: 'cloud native',
-            intersted_in: 'intersted in',
+            interested_in: 'intersted in',
             project_management: 'project management',
             knowledge_management: 'knowledge management',
             ui_ux_design: 'UI/UX design',
             problem_solving_oriented_deep_learning: 'Problem-solving-oriented Deep Learning',
+            uses: 'uses',
+            journal: 'journal',
         },
         zh: {
             hello: '你好',
@@ -45,6 +48,7 @@ export default defineI18nConfig(() => ({
             a: '一名',
             a_fullstack_developer: '@:a@:fullstack@:developer',
             search_any_contents: '搜索文章内容',
+            overview_of_techstacks: '@:technical_stacks',
             web: 'Web 前端',
             backend: '后端',
             mobile: '移动端',
@@ -56,6 +60,8 @@ export default defineI18nConfig(() => ({
             knowledge_management: '知识管理',
             ui_ux_design: 'UI/UX 设计',
             problem_solving_oriented_deep_learning: '应用导向的深度学习',
+            uses: '工具',
+            journal: '手账',
         }
     }
 }))

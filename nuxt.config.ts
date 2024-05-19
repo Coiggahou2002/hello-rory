@@ -38,8 +38,13 @@ export default defineNuxtConfig({
         normal: 400,
         regular: 400,
       },
-      'Fira Sans': [200, 300, 400, 500, 600, 700],
-      'Fira Sans Condensed': [400, 500, 600, 700],
+      'Barlow Semi Condensed': {
+        wght: [200, 400, 600],
+        normal: 400,
+        regular: 400,
+      },
+      // 'Fira Sans': [200, 300, 400, 500, 600, 700],
+      // 'Fira Sans Condensed': [400, 500, 600, 700],
     }
   },
   colorMode: {

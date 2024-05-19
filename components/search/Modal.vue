@@ -74,13 +74,13 @@ const handleKeyUp = (e: KeyboardEvent) => {
 .search_modal {
    top: 20vh;
    left: 50vw;
-   @apply fixed mx-auto -translate-x-1/2 bg-white dark:bg-gray-800 shadow-2xl drop-shadow rounded-xl w-1/2 overflow-hidden;
+   @apply fixed mx-auto -translate-x-1/2 bg-white dark:bg-gray-800 shadow  rounded-xl w-1/2 overflow-hidden;
 
    &_inputw {
       @apply p-4;
 
       input {
-         @apply font-light text-lg w-full bg-transparent dark:text-white;
+         @apply  text-lg w-full bg-transparent dark:text-white;
 
          &::placeholder {
             @apply text-gray-300 dark:text-gray-400;

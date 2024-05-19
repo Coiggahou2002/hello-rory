@@ -17,13 +17,13 @@ useGlobalSearchModal();
 <style>
 html {
   /* font-family: 'Fira Sans Condensed' !important; */
-  font-family: 'Fira Sans', sans-serif !important;
+  /* font-family: 'Fira Sans', sans-serif !important; */
   /* font-family: 'Crimson Pro' !important; */
   /* font-family: 'Ubuntu Condensed' !important; */
   /* font-family: 'Roboto' !important; */
   /* font-family: 'Ubuntu' !important; */
   /* font-family: 'Lato' !important; */
-  /* font-family: 'Barlow' !important; */
+  font-family: 'Barlow' !important;
   font-size: 18px;
   scroll-behavior: smooth;
   @apply text-slate-700

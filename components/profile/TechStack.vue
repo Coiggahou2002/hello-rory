@@ -1,6 +1,6 @@
 <template>
-   <p key="tech_title" class="selfintro_text pt-10 font-normal">An overview of my {{ $t('technical_stacks') }}:
-   </p>
+   <div key="tech_title" class="text-lg text-gray-600 dark:text-gray-300 my-2 leading-8 pt-10 font-semibold">{{ $t('overview_of_techstacks') }}:
+   </div>
    <ul>
       <li class="tech_item" v-for="tech in TECH_STACK_CONF" :key="tech.title">
          <span class="tech_item_prefix">#</span>
@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang='ts'>
-import type {Profile} from "@/types/profile";
+import type { Profile } from "@/types/profile";
 const { t } = useI18n();
 
 const TECH_STACK_CONF: Profile.TechStackConfig = [
@@ -74,14 +74,15 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .tech_item {
-   @apply my-2 font-light leading-loose;
+   @apply my-2 leading-loose;
 
    &_key {
-      @apply font-light text-gray-600 dark:text-gray-400;
+      @apply font-normal text-gray-600 dark:text-gray-400;
    }
 
    &_prefix {
-      @apply text-gray-300 font-normal mr-1;
+      @apply font-normal text-gray-300 dark:text-gray-600 mr-1;
    }
 }
+
 </style>

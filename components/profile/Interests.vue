@@ -1,5 +1,5 @@
 <template>
-   <p key="interests" class="selfintro_text pt-10 font-normal">Interested in:</p>
+   <p key="interests" class="text-lg text-gray-600 dark:text-gray-300 my-2 leading-8 pt-10 font-semibold">{{ capitalize($t('interested_in')) }}:</p>
    <ul>
       <li class="interest_item" v-for="i in INTERESTS">
          <span class="interest_item_prefix">#</span>
@@ -22,14 +22,14 @@ const INTERESTS = [
 
 <style scoped lang="scss">
 .interest_item {
-   @apply my-3 font-light;
+   @apply my-3;
 
    &_key {
-      @apply font-light text-gray-600 dark:text-gray-400;
+      @apply font-normal text-gray-600 dark:text-gray-400;
    }
 
    &_prefix {
-      @apply text-gray-300 font-normal mr-1;
+      @apply text-gray-300 dark:text-gray-600 font-normal mr-1;
    }
 }
 </style>

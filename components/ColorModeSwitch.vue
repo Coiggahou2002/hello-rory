@@ -2,9 +2,9 @@
   <div class="cursor-pointer p-2 w-10 h-10 border-gray-400 text-gray-800 rounded" @click="toggleColorMode">
     <ColorScheme placeholder="..." tag="span">
       <SvgoDark key="darkicon" v-if="colorMode.value === 'dark'" :font-controlled="false"
-        class="text-gray-500 dark:hover:text-gray-400" />
+        class="dark:text-gray-600 dark:hover:text-gray-400" />
       <SvgoLight key="lighticon" v-if="colorMode.value === 'light'" :font-controlled="false"
-        class="text-gray-600 hover:text-gray-800" />
+        class="text-gray-300 hover:text-gray-800" />
     </ColorScheme>
   </div>
 </template>
