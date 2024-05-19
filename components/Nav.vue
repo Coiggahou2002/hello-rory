@@ -44,8 +44,8 @@ const openMenuMask = () => {
 const NAVS: Navigations.NavItem[] = [
    { text: 'me', to: '/' },
    { text: 'blogs', to: '/blogs' },
-   { text: 'uses', to: '/uses' },
-   { text: 'journal', to: '/journal' },
+   { text: 'uses', to: '/menu/uses' },
+   { text: 'journal', to: '/menu/journal' },
 ];
 
 

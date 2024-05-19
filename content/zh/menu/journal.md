@@ -15,14 +15,14 @@
 
 ::fancy-quote
 #sentence
-Improving yourself is better than proving yourself.
+且视他人之疑目如盏盏鬼火，大胆去走你的夜路。
 #cite
-— Anonymous
+— 史铁生
 ::
 
 ::fancy-quote
 #sentence
-When I cannot create, I do not understand. 
+当我无法创造一个东西时，我就无法彻底理解它。
 #cite
 — Richard Phillips Feynman
 ::
