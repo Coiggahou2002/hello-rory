@@ -1,9 +1,9 @@
 <template>
-   <Transition>
+   <!-- <Transition> -->
       <div id="search_modal_mask" ref="SearchModalRef" v-show="isOpen" class="mask" @click.self="closeModal">
          <div class="search_modal">
             <div class="search_modal_inputw flex justify-center items-center">
-               <SearchIcon class="h-5 w-5 mr-2" filled :font-controlled="false" />
+               <SvgoSearch class="h-5 w-5 mr-2" filled :font-controlled="false" />
                <input autocomplete="off" id="search_modal_input" class="search_modal_input" :placeholder="$t('search_any_contents')"
                   v-model="searchValue" @keyup="handleKeyUp" @keydown="handleKeyDown" />
             </div>
@@ -17,11 +17,10 @@
             </div>
          </div>
       </div>
-   </Transition>
+   <!-- </Transition> -->
 </template>
 
 <script setup lang="ts">
-import SearchIcon from "@/assets/icons/search.svg";
 
 const SearchModalResultRef = ref<HTMLDivElement | null>(null);
 
@@ -116,13 +115,13 @@ const handleKeyUp = (e: KeyboardEvent) => {
 }
 
 
-.v-enter-active,
-.v-leave-active {
-   transition: opacity 0.2s ease;
-}
+// .v-enter-active,
+// .v-leave-active {
+//    transition: opacity 0.2s ease;
+// }
 
-.v-enter-from,
-.v-leave-to {
-   opacity: 0;
-}
+// .v-enter-from,
+// .v-leave-to {
+//    opacity: 0;
+// }
 </style>

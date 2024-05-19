@@ -16,9 +16,9 @@
          <ColorModeSwitch :mode="colorMode.preference" class="mr-1" />
          <li class="invisible lg:visible">
             <div class="search_btn flex items-center justify-start" @click="dispatchOpenModal" ref="SearchBtnRef">
-               <SearchIcon id="nav_search_icon" class="h-4 w-4 mr-2" filled :font-controlled="false" />
+               <SvgoSearch id="nav_search_icon" class="h-4 w-4 mr-2" filled :font-controlled="false" />
                <span>{{ $t('search') }}</span>
-               <CommandIcon class="h-4 w-4 ml-2 " filled  :font-controlled="false" />
+               <SvgoCommand class="h-4 w-4 ml-2 " filled  :font-controlled="false" />
                <span>K</span>
             </div>
          </li>
@@ -27,9 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import SearchIcon from "@/assets/icons/search.svg";
 import type { NavItem } from '@nuxt/content/types';
-import CommandIcon from '@/assets/icons/command.svg';
 const { openModal } = useGlobalSearchModal();
 const colorMode = useColorMode()
 const localePath = useLocalePath();
@@ -78,7 +76,7 @@ const dispatchOpenModal = () => {
 
 <style lang="scss" scoped>
 .search_btn {
-   @apply w-32 cursor-pointer py-2 px-2 bg-gray-100/75 dark:bg-gray-900/75 rounded-lg text-sm text-gray-400 hover:scale-110 transition-transform;
+   @apply w-32 cursor-pointer py-2 px-2 bg-gray-100/75 dark:bg-gray-900/50 rounded-lg text-sm text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900/75 ;
 
    span {
       @apply text-gray-400;
@@ -87,7 +85,7 @@ const dispatchOpenModal = () => {
 
 .nav_item {
    //   border-b-2 border-b-transparent hover:border-gray-400
-   font-family: 'Fira Sans Condensed' !important;
+   font-family: 'Fira Sans' !important;
    @apply text-xl text-gray-300 hover:text-gray-800 transition-all dark:text-gray-600 dark:hover:text-gray-300 py-2 my-1;
    // decoration-gray-200 dark:decoration-gray-700;
 

@@ -1,17 +1,15 @@
 <template>
   <div class="cursor-pointer p-2 w-10 h-10 border-gray-400 text-gray-800 rounded" @click="toggleColorMode">
     <ColorScheme placeholder="..." tag="span">
-      <DarkModeIcon key="darkicon" v-if="colorMode.value === 'dark'" :font-controlled="false"
+      <SvgoDark key="darkicon" v-if="colorMode.value === 'dark'" :font-controlled="false"
         class="text-gray-500 dark:hover:text-gray-400" />
-      <LightModeIcon key="lighticon" v-if="colorMode.value === 'light'" :font-controlled="false"
+      <SvgoLight key="lighticon" v-if="colorMode.value === 'light'" :font-controlled="false"
         class="text-gray-600 hover:text-gray-800" />
     </ColorScheme>
   </div>
 </template>
 
 <script lang="ts" setup>
-import LightModeIcon from '~/assets/light.svg'
-import DarkModeIcon from '~/assets/dark.svg'
 const colorMode = useColorMode()
 const toggleColorMode = (e: MouseEvent) => {
   if (!document.startViewTransition) {

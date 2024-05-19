@@ -4,7 +4,7 @@
       <div class="relative">
         <ContentDoc>
           <template v-slot="{ doc }">
-            <TocNav class="tocnav absolute ml-4 invisible xl:visible" :toc="doc.body?.toc" />
+            <BlogTocNav class="tocnav absolute ml-4 invisible xl:visible" :toc="doc.body?.toc" />
             <article >
               <ContentRenderer :value="doc" />
             </article>
