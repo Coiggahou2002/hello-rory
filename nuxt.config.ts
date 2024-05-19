@@ -43,6 +43,11 @@ export default defineNuxtConfig({
         normal: 400,
         regular: 400,
       },
+      'Playfair Display': {
+        wght: [400],
+        normal: 400,
+        regular: 400,
+      }
       // 'Fira Sans': [200, 300, 400, 500, 600, 700],
       // 'Fira Sans Condensed': [400, 500, 600, 700],
     }
