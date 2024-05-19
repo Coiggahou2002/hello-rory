@@ -1,6 +1,9 @@
 import { Markdown } from './.nuxt/components.d';
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  build: {
+    analyze: true,
+  },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' }
   },
@@ -17,6 +20,9 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     "@nuxtjs/i18n"
   ],
+  svgo: {
+    autoImportPath: './assets/icons/',
+  },
   dayjs: {
     locales: ['en', 'fr'],
     plugins: ['relativeTime', 'utc', 'timezone'],
