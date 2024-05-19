@@ -1,5 +1,5 @@
 <template>
-   <div class="fancy_quote mb-6 w-full rounded-lg  overflow-hidden dark:bg-gray-900/35 bg-gray-100">
+   <div class="fancy_quote mb-6 w-full rounded-lg  overflow-hidden dark:bg-gray-900/35 bg-gray-200/40">
       <div class="px-4 pt-4 pb-4">
          <p class="text-left leading-relaxed">
             <ContentSlot name="sentence" unwrap="p" />
