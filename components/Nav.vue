@@ -18,6 +18,8 @@
             <div class="search_btn flex items-center justify-start" @click="dispatchOpenModal" ref="SearchBtnRef">
                <SearchIcon id="nav_search_icon" class="h-4 w-4 mr-2" filled :font-controlled="false" />
                <span>{{ $t('search') }}</span>
+               <CommandIcon class="h-4 w-4 ml-2 " filled  :font-controlled="false" />
+               <span>K</span>
             </div>
          </li>
       </ul>
@@ -27,6 +29,7 @@
 <script lang="ts" setup>
 import SearchIcon from "@/assets/icons/search.svg";
 import type { NavItem } from '@nuxt/content/types';
+import CommandIcon from '@/assets/icons/command.svg';
 const { openModal } = useGlobalSearchModal();
 const colorMode = useColorMode()
 const localePath = useLocalePath();
