@@ -2,7 +2,7 @@
 
 A website for handsomes and beauties to get to know about Rory powered by [Nuxt Content](https://content.nuxt.com/).
 
-## Features Plan
+## ✨ Features Plan
 
 - [x] 🌛 Dark Mode
 - [x] 🌍 Customized Navigations
@@ -14,6 +14,8 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
 - [ ] Responsive Adaptation for mobile phone
 - [ ] Add scroll-triggered animations and more UI elements
 - [ ] Add connection-visualized graph
+- [ ] i18n
+- [ ] favicon.ico
 
 ### Markdown Components Override
 
@@ -33,11 +35,43 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
 - [ ] table
 - [ ] quote
 
-## Contents
+## 🚀 Optimizations
+
+- [ ] Use CDN for external dependencies
+- [ ] Reduce times that search requests being sent
+
+## 🐛 Bugs
+
+- [ ] ban iOS bouncing slide
+- [ ] code block overflow
+- [ ] 
+
+## 📄 Contents
 
 - [ ] About
 
-## Integrated Modules
+## 📁 Project Directory Structure
+```
+.
+├── assets
+│   ├── icons
+│   └── images
+├── components
+│   ├── blog (Components used in blog page)
+│   ├── content (Overrided markdown components)
+│   ├── profile (Components used in profile)
+│   └── search
+├── composables
+├── content (Content files)
+├── pages (Custom pages)
+├── public
+├── server
+├── stores
+├── types
+└── utils
+```
+
+## ⚙️ Integrated Modules
 
 - [@nuxtjs/color-mode](https://nuxt.com/modules/color-mode)
 - [@nuxt/content](https://content.nuxt.com/)
