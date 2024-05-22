@@ -1,4 +1,10 @@
+[![nuxt-content-social-card](https://github.com/nuxt/content/blob/main/docs/public/social-card.png?raw=true)](https://content.nuxt.com)
+
 # Rory's Pages
+
+[![Nuxt][nuxt-src]][nuxt-href]
+[![Tailwind][tailwind-src]][tailwind-href]
+[![Vercel][vercel-src]][vercel-href]
 
 A website for handsomes and beauties to get to know about Rory powered by [Nuxt Content](https://content.nuxt.com/).
 
@@ -84,3 +90,15 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
 - [@vueuse/nuxt](https://vueuse.org/nuxt/README.html)
 - [dayjs-nuxt](https://nuxt.com/modules/dayjs)
 - [@hypernym/nuxt-anime](https://nuxt.com/modules/animejs)
+
+
+[tailwind-src]: https://img.shields.io/badge/Tailwind-000000?logo=TailwindCSS
+[tailwind-href]: https://tailwindcss.com/
+
+
+[nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
+[nuxt-href]: https://nuxt.com
+[![License][license-src]][license-href]
+
+[vercel-src]: https://img.shields.io/badge/vercel-000000?logo=Vercel
+[vercel-href]: https://vercel.com
