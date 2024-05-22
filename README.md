@@ -16,19 +16,19 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
 - [x] 🔧 Overwrite basic markdown components
 - [x] 🔍 Content Search
 - [x] 📄 TOC for articles
-- [ ] Custom text selection color
-- [ ] Refactor nav styles
-- [ ] Sync toc-nav highlight item with content position
-- [ ] Responsive Adaptation for mobile phone
+- [x] 📱 Responsive Adaptation for mobile phone
     - [x] Collapse navigation bar to menu button
+- [x] 💬 i18n
+- [x] 🎨 Custom text selection color
+- [ ] Sync toc-nav highlight item with content position
 - [ ] Add scroll-triggered animations and more UI elements
 - [ ] Add connection-visualized graph
-- [ ] i18n
 - [ ] favicon.ico
 
 ### Markdown Components Override
 
 - [x] p
+- [x] a
 - [x] h1
 - [x] h2
 - [x] h3
@@ -38,11 +38,11 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
 - [x] code
 - [x] pre
 - [x] img
+- [x] blockquote
 - [ ] h4
 - [ ] h5
 - [ ] h6
 - [ ] table
-- [ ] quote
 
 ## 🚀 Optimizations
 
@@ -53,11 +53,6 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
 
 - [ ] ban iOS bouncing slide
 - [ ] code block overflow
-- [ ] 
-
-## 📄 Contents
-
-- [ ] About
 
 ## 📁 Project Directory Structure
 ```
@@ -91,6 +86,8 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
 - [@vueuse/nuxt](https://vueuse.org/nuxt/README.html)
 - [dayjs-nuxt](https://nuxt.com/modules/dayjs)
 - [@hypernym/nuxt-anime](https://nuxt.com/modules/animejs)
+- [@nuxtjs/i18n](https://nuxt.com/modules/i18n)
+- [@pinia/nuxt](https://nuxt.com/modules/pinia)
 
 
 [tailwind-src]: https://img.shields.io/badge/Tailwind-18181B?logo=TailwindCSS
