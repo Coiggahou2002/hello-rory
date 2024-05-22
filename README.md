@@ -3,6 +3,7 @@
 # Rory's Pages
 
 [![Nuxt][nuxt-src]][nuxt-href]
+[![Nuxt Content][nuxt-content-src]][nuxt-content-href]
 [![Tailwind][tailwind-src]][tailwind-href]
 [![Vercel][vercel-src]][vercel-href]
 
@@ -92,13 +93,14 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
 - [@hypernym/nuxt-anime](https://nuxt.com/modules/animejs)
 
 
-[tailwind-src]: https://img.shields.io/badge/Tailwind-000000?logo=TailwindCSS
+[tailwind-src]: https://img.shields.io/badge/Tailwind-18181B?logo=TailwindCSS
 [tailwind-href]: https://tailwindcss.com/
-
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com
-[![License][license-src]][license-href]
 
-[vercel-src]: https://img.shields.io/badge/vercel-000000?logo=Vercel
+[nuxt-content-src]: https://img.shields.io/badge/Nuxt_Content-18181B?logo=nuxt.js
+[nuxt-content-href]: https://content.nuxt.com
+
+[vercel-src]: https://img.shields.io/badge/vercel-18181B?logo=Vercel
 [vercel-href]: https://vercel.com
