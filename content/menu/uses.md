@@ -20,6 +20,8 @@ Font: Monaco.
 
 Browser: [Arc Browser](https://arc.net/) or Firefox Developer Edition.
 
+Image Capturing: [Snipaste](https://www.snipaste.com/) for capturing images and sticking them on top of my screen.
+
 ## Hardware
 
 MacBook Air 13" M2 16GB

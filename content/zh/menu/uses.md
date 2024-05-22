@@ -2,28 +2,34 @@
 
 ## ️写码工具
 
-Visual Studio Code with minimal settings.
+Visual Studio Code
 
-Font: JetBrains Mono, Fira Code with [font-ligature](https://fonts.google.com/knowledge/glossary/ligature).
+字体: JetBrains Mono, Fira Code with [font-ligature](https://fonts.google.com/knowledge/glossary/ligature).
 
-Theme: [Mayukai Alucard](https://marketplace.visualstudio.com/items?itemName=GulajavaMinistudio.mayukaithemevsc).
+主题: [Mayukai Alucard](https://marketplace.visualstudio.com/items?itemName=GulajavaMinistudio.mayukaithemevsc).
 
-Icons: [Material Icons](https://marketplace.visualstudio.com/items?itemName=Equinusocio.vsc-material-theme-icons).
+图标: [Material Icons](https://marketplace.visualstudio.com/items?itemName=Equinusocio.vsc-material-theme-icons).
 
 ## 终端
 
-[Warp](https://www.warp.dev/) terminal emulator, running zsh.
+[Warp](https://www.warp.dev/): 一个支持多标签页、自定义工作流的终端模拟器。
 
-Font: Monaco.
+字体: Monaco.
+
+## 有趣的工具
+
+幻灯片: [Slidev](https://sli.dev/), 从此摆脱 PowerPoint。
 
 ## 桌面应用
 
-Browser: [Arc Browser](https://arc.net/) or Firefox Developer Edition.
+浏览器: [Arc Browser](https://arc.net/)
+
+截图工具: [Snipaste](https://www.snipaste.com/) 用来快速截图并把图片钉在屏幕上.
 
 ## 硬件
 
 MacBook Air 13" M2 16GB
 
-Headphone: AirPods 3
+耳机 AirPods 3
 
-Keyboard: Keychron K3
+键盘: Keychron K3
