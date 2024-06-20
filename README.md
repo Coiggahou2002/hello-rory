@@ -20,6 +20,9 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
     - [x] Collapse navigation bar to menu button
 - [x] 💬 i18n
 - [x] 🎨 Custom text selection color
+- [ ] SEO and Meta
+  - [ ] Page Title (should handle titles of both .md and SFC pages correctly)
+  - [ ] Page description
 - [ ] Sync toc-nav highlight item with content position
 - [ ] Add scroll-triggered animations and more UI elements
 - [ ] Add connection-visualized graph
@@ -28,6 +31,7 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
 - [ ] 3D models and animations by TresJS
 - [ ] 2D frame animations by lottie
 - [ ] Separate content source with the source code of this framework
+- [ ] Support tags
 
 ### Markdown Components Override
 
