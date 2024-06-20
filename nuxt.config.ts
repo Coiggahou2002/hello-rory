@@ -77,6 +77,9 @@ export default defineNuxtConfig({
     ]
   },
   content: {
+    ignores: [
+      '.dft.md$'
+    ],
     experimental: {
       search: true
     },
