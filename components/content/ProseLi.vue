@@ -1,5 +1,5 @@
 <template>
-   <li class="font-light text-gray-700 dark:text-gray-300 my-1 leading-relaxed">
+   <li class="font-normal text-gray-700 dark:text-gray-300 my-1 leading-relaxed">
       <slot />
    </li>
 </template>
