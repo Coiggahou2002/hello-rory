@@ -1,3 +1,7 @@
+---
+draft: true
+---
+
 # 毕设工具推荐
 
 Latex
