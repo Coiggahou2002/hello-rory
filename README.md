@@ -24,6 +24,10 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
 - [ ] Add scroll-triggered animations and more UI elements
 - [ ] Add connection-visualized graph
 - [ ] favicon.ico
+- [ ] GSAP scroll animations
+- [ ] 3D models and animations by TresJS
+- [ ] 2D frame animations by lottie
+- [ ] Separate content source with the source code of this framework
 
 ### Markdown Components Override
 
