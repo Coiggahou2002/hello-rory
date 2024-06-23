@@ -3,6 +3,9 @@ useGlobalSearchModal();
 </script>
 
 <template>
+  <Head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  </Head>
   <div class="flex flex-col justify-center items-center">
     <Nav />
     <ClientOnly>
@@ -27,6 +30,8 @@ html {
   font-size: 18px;
   scroll-behavior: smooth;
   @apply text-slate-700 selection:text-gray-800 selection:bg-gray-200 dark:selection:bg-gray-700 dark:selection:text-gray-200;
+
+  overflow-x: hidden;
 }
 
 body {
