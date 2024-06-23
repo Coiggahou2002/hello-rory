@@ -20,18 +20,20 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
     - [x] Collapse navigation bar to menu button
 - [x] 💬 i18n
 - [x] 🎨 Custom text selection color
+- [x] 💄 Customized tips components like `info`, `warning` etc.
+- [x] favicon.ico
 - [ ] SEO and Meta
   - [ ] Page Title (should handle titles of both .md and SFC pages correctly)
   - [ ] Page description
 - [ ] Sync toc-nav highlight item with content position
 - [ ] Add scroll-triggered animations and more UI elements
 - [ ] Add connection-visualized graph
-- [ ] favicon.ico
 - [ ] GSAP scroll animations
 - [ ] 3D models and animations by TresJS
 - [ ] 2D frame animations by lottie
 - [ ] Separate content source with the source code of this framework
 - [ ] Support tags
+- [ ] Display matched results current-locale-only when using search
 
 ### Markdown Components Override
 
@@ -44,9 +46,11 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
 - [x] ol
 - [x] li
 - [x] code
+- [x] strong
 - [x] pre
 - [x] img
 - [x] blockquote
+- [x] hr
 - [ ] h4
 - [ ] h5
 - [ ] h6
@@ -59,8 +63,8 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
 
 ## 🐛 Bugs
 
+- [x] ~~code block overflow~~
 - [ ] ban iOS bouncing slide
-- [ ] code block overflow
 
 ## 📁 Project Directory Structure
 ```
@@ -69,6 +73,7 @@ A website for handsomes and beauties to get to know about Rory powered by [Nuxt 
 │   ├── icons
 │   └── images
 ├── components
+│   ├── base (Basic Components)
 │   ├── blog (Components used in blog page)
 │   ├── content (Overrided markdown components)
 │   ├── profile (Components used in profile)
