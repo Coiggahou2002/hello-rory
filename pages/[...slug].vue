@@ -22,7 +22,7 @@
 <style scoped lang="scss">
 .tocnav {
   position: fixed;
-  transform: translateX(-240px) translateY(100px);
+  transform: translateX(-260px) translateY(100px);
   width: 200px;
 }
 </style>
