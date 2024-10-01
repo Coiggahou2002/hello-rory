@@ -1,5 +1,5 @@
 <template>
-   <div @mouseleave="handleMouseLeaveTocNav">
+   <div>
       <ul class="tocnav">
          <BlogTocLink v-for="link of toc.links" :key="link.id" :link="link" />
       </ul>
