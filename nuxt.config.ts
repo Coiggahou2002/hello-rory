@@ -84,7 +84,7 @@ export default defineNuxtConfig({
       search: true
     },
     markdown: {
-      toc: { depth: 3, searchDepth: 3 },
+      toc: { depth: 2, searchDepth: 3 },
       remarkPlugins: {
         // Override remark-emoji options
         // 'remark-emoji': {
