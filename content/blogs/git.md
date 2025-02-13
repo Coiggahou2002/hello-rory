@@ -79,6 +79,7 @@ AM components/content/ProseH4.vue
 git add ${files}
 git checkout ${branchName}
 git checkout -b ${newBranch}  # 从当前分支创建一个分支并签出
+git checkout - # 切回上一个分支
 ```
 
 ### 查看类
@@ -86,13 +87,19 @@ git checkout -b ${newBranch}  # 从当前分支创建一个分支并签出
 ```sh
 git status # 查看状态
 git status -s # 以文件列表方式查看状态
+git branch --show-current # 打印当前分支名
 git log ${branch} # 查看分支提交历史
 git show ${commitHash} # 查看指定 commit 的具体改动
 
 
 git diff --name-only # 列出当前处于 Modified 状态的所有文件名
 git diff --staged --name-only # 列出当前处于缓冲区的所有文件的文件名，通常用于提交前格式化等作用
-git diff --staged --name-only | xargs prettier --write # 将缓存区中所有文件用 prettier 格式化
+
+# 列出缓冲区中所有文件的文件名，只显示新添加、复制、修改文件
+git diff --staged --diff-filter=ACM
+
+# 将缓存区中所有文件用 prettier 格式化
+git diff --staged --name-only | xargs prettier --write 
 ```
 
 ### 关于更改缓冲区
@@ -156,6 +163,25 @@ git reset --hard origin/master
 git reset --hard xxx
 git push -f
 ```
+
+## 一些小技巧
+
+可以用上面的一些命令进行组合得到一些常用命令
+
+例如，我在分支 A，希望更新一下分支 B，然后把 B 合到 A
+```sh
+# shell 函数形式
+update_merge() {
+  git checkout B
+  git pull
+  git checkout -
+  git merge B
+}
+
+# 配合 alias 可以一行简写
+gco B && pull && gco - && git merge B
+```
+
 
 
 ## tag 相关
