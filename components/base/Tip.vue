@@ -24,13 +24,18 @@ enum TipType {
 
 interface Tip {
    type: TipType;
+   title: string;
 }
 
 const props = withDefaults(defineProps<Tip>(), {
    type: TipType.Info,
+   title: '',
 })
 
 const defaultTitle = computed(() => {
+   if (props.title) {
+      return props.title
+   }
    switch (props.type) {
       case TipType.Info:
          return 'Info'
