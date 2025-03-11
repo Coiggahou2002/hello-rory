@@ -3,7 +3,7 @@
     <div class="w-full flex-col flex">
       <ContentList path="/blogs" v-slot="{ list }">
         <div v-for="article in list" :key="article._path">
-          <BlogLink :blog="article" />
+          <BlogLink v-if="!article._draft" :blog="article" />
         </div>
       </ContentList>
     </div>
