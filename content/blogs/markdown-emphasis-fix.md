@@ -1,3 +1,8 @@
+---
+title: 一种 markdown-it 加粗识别失效 case 研究与修复
+time: 2025-03-11 13:00
+---
+
 # 一种 markdown-it 加粗识别失效 case 研究与修复
 
 ## 背景
