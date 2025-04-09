@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     analyze: true,
   },
   app: {
-    pageTransition: { name: 'page', mode: 'out-in' }
+    // pageTransition: { name: 'page', mode: 'out-in' }
   },
   devtools: { enabled: true },
   modules: [
