@@ -91,6 +91,10 @@ time: 2025-04-08
 </html>
 ```
 
+:::warning{title=注意}
+这里只是简单的把参数拼接了起来，可能会出现 `my log: [object Object]` 这样的输出，可以视业务需要，在 join 之前把每个参数 `JSON.stringify` 一下，当然，要记得添加 try-catch
+:::
+
 ### NextJS 写法
 
 如果框架是 NextJS 可以这么写:
@@ -103,6 +107,8 @@ The loading strategy of the script. There are four different strategies that can
 - `afterInteractive`: (default) Load early but after some hydration on the page occurs.
 - `lazyOnload`: Load during browser idle time.
 - `worker`: (experimental) Load in a web worker.
+
+> Scripts with `beforeInteractive` will always be injected inside the head of the HTML document regardless of where it's placed in the component. This strategy should only be used for critical scripts that need to be fetched as soon as possible.
 
 我们可以选择 `beforeInteractive` 策略，使得脚本插入位置尽可能早
 
@@ -121,8 +127,7 @@ The loading strategy of the script. There are four different strategies that can
 
 ### 步骤
 
-#### 1. 让 `MyWebViewController` 遵循 `WKScriptMessageHandler` 协议
-要在 `MyWebViewController` 的头文件（`.h` 文件）或者类扩展（`.m` 文件里的匿名类别）中声明遵循 `WKScriptMessageHandler` 协议。
+让 `MyWebViewController` 遵循 `WKScriptMessageHandler` 协议
 
 ```objc
 // MyWebViewController.h
@@ -135,8 +140,7 @@ The loading strategy of the script. There are four different strategies that can
 @end
 ```
 
-#### 2. 实现 `WKScriptMessageHandler` 协议的方法
-在 `MyWebViewController` 的实现文件（`.m` 文件）里实现 `WKScriptMessageHandler` 协议的 `userContentController:didReceiveScriptMessage:` 方法。
+实现 `WKScriptMessageHandler` 协议的 `userContentController:didReceiveScriptMessage:` 方法。
 
 ```objc
 // MyWebViewController.m
@@ -157,13 +161,14 @@ The loading strategy of the script. There are four different strategies that can
 @end
 ```
 
-#### 3. 确保传递对象的类型正确
-在把 `MyWebViewController` 对象传递给需要遵循 `WKScriptMessageHandler` 协议的参数时，要保证传递的对象类型无误。
+创建 `WKUserContentController` 实例，接收对应的事件，然后赋值给 `WKWebViewConfiguration` 的 userContentController
 
 ```objc
 // 在某个方法中设置消息处理程序
 WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+
 WKUserContentController *userContentController = [[WKUserContentController alloc] init];
+
 [userContentController addScriptMessageHandler:self name:@"ConsoleLog"]; // 这里的 self 就是 MyWebViewController 实例
 config.userContentController = userContentController;
 
@@ -205,7 +210,7 @@ WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.bounds configura
 
 // 处理 JavaScript 发送的消息
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
-    if ([message.name isEqualToString:@"consoleLog"]) {
+    if ([message.name isEqualToString:@"ConsoleLog"]) {
         NSDictionary *logInfo = message.body;
         NSString *logType = logInfo[@"type"];
         NSString *logMessage = logInfo[@"message"];
@@ -225,6 +230,10 @@ WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.bounds configura
 
 这个示例代码展示了如何让 `MyWebViewController` 遵循 `WKScriptMessageHandler` 协议，并且处理从 JavaScript 发送过来的消息。 
 
+:::info{title=提醒}
+这里的 `NSLog` 一般需要替代成业务实际使用的日志方法
+:::
+
 :::warning{title=注意}
 - 在 iOS 14 及以上版本中，若要使用 `WKScriptMessageHandler`，需在 `Info.plist` 文件里添加 `NSAppTransportSecurity` 字典，并将 `NSAllowsArbitraryLoads` 设置为 `YES`。
 :::
@@ -234,7 +243,8 @@ WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.bounds configura
 
 ### 代码示例
 
-在 `MainActivity.java` 中对 WebView 进行配置，启用 JavaScript 支持，设置 WebChromeClient。
+在 `MainActivity.java` 中对 WebView 进行配置，启用 JavaScript 支持，设置 WebChromeClient 并重写 `onConsoleMessage` 方法，用于拦截和处理 HTML 控制台的输出。根据控制台消息的级别（如 `LOG`、`ERROR`、`WARN` 等），将消息输出到 Android 的日志系统中。
+
 ```kotlin
 import android.os.Bundle
 import android.util.Log
@@ -298,8 +308,8 @@ class MainActivity : AppCompatActivity() {
 ```
 
 
-### 代码解释
-- **WebView 配置**：通过 `webView.getSettings().setJavaScriptEnabled(true)` 启用 JavaScript 支持，确保 HTML 页面中的 JavaScript 代码能够正常执行。
-- **WebViewClient**：设置 `WebViewClient` 用于处理页面加载和导航等事件。
-- **WebChromeClient**：设置 `WebChromeClient` 并重写 `onConsoleMessage` 方法，用于拦截和处理 HTML 控制台的输出。根据控制台消息的级别（如 `LOG`、`ERROR`、`WARN` 等），将消息输出到 Android 的日志系统中。
-- **加载 HTML 文件**：使用 `webView.loadUrl("file:///android_asset/index.html")` 加载 `assets` 目录下的 `index.html` 文件。
+## 总结
+
+最后来总结一下：
+- iOS 无法从原生直接 hook，所以在 HTML 最前面插入一段脚本，预先把所有 console 日志方法全部改写，Web 和原生两侧都加入通信逻辑，相当于所有日志旁路一份给原生；
+- Android 可以直接 hook 控制台输出，所以不需要用通信的方式。
