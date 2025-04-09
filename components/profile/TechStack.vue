@@ -27,7 +27,9 @@ const TECH_STACK_CONF: Profile.TechStackConfig = [
    {
       title: t('mobile'),
       tags: [
-         { text: 'React Native', icon: 'react' }
+         { text: 'React Native', icon: 'react' },
+         { text: 'Kotlin', icon: 'kotlin' },
+         { text: 'Objective-C', icon: 'ios' },
       ]
    },
    {
