@@ -6,7 +6,7 @@
           <template v-slot="{ doc }">
             <BlogTocNav class="tocnav absolute ml-4 invisible xl:visible overflow-auto" :toc="doc.body?.toc" />
             <article >
-              <ContentRenderer :value="doc" />
+              <BlogContent :blog="doc" />
             </article>
           </template>
           <template #not-found>

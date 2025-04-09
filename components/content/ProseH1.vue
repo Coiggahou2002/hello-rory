@@ -1,5 +1,5 @@
 <template>
-   <h1 class="font-bold text-4xl my-4 text-gray-800 dark:text-white" :id="id">
+   <h1 class="font-semibold text-3xl my-4 text-gray-800 dark:text-white" :id="id">
       <a v-if="generate" :href="`#${id}`">
          <slot />
       </a>
