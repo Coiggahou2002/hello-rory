@@ -6,19 +6,30 @@ time: 2025-01-22
 # React Native 列表 removeClippedSubview 的坑
 
 
-## 属性简介
+## 一、属性简介
 
 React Native 官方文档在[如何优化 FlatList 性能](https://reactnative.dev/docs/0.72/optimizing-flatlist-configuration#removeclippedsubviews) 这篇博客，提到过一个名为 `removeClippedSubviews` 的属性，说是可以减轻主线程的计算负担，从而减少掉帧的出现。
 
-其原理是把一些没出现在视图里的 subview 从它的 superview 上卸载下来（但仍然保留在内存中）
-
 ![removeClippedSubviews](https://cjpark-1304138896.cos.ap-guangzhou.myqcloud.com/blog_img/202503191118712.png)
 
-## 背景 
+其原理是: **把一些没出现在视图里的 view 从它的 superview 上卸载下来（但仍然保留在内存中）**
 
-我们业务有一个 IntersectionObserverView 组件，它使用一个 View 包裹一个目标组件（此处简称 target），使用 RN 提供的 [measure](https://reactnative.dev/docs/0.72/direct-manipulation#measurecallback) 方法来测量 target 出现在 RCTRootView 中的面积是否达到指定的要求，从而判定此组件是否「曝光」，然后触发对应的回调，主要为业务曝光埋点需求服务。
+## 二、背景 
 
-## 问题表现
+我们业务有一个 `IntersectionObserverView` 组件，它使用一个 View 包裹一个目标组件（此处简称 target），使用 RN 提供的 [measure](https://reactnative.dev/docs/0.72/direct-manipulation#measurecallback) 方法来测量 target 出现在 RCTRootView 中的面积是否达到指定的要求，从而判定此组件是否「曝光」，然后触发对应的回调，主要用于业务曝光埋点需求。
+
+![包裹示意图](https://cjpark-1304138896.cos.ap-guangzhou.myqcloud.com/blog_img/202504171317260.png)
+
+
+测量原理如下图，`measure` 方法会返回 target 相对于 `RCTRootView` 四边的距离。
+
+![检测原理](https://cjpark-1304138896.cos.ap-guangzhou.myqcloud.com/blog_img/202504171328452.png)
+
+根据这四个距离，我们可以计算出 **target 与 RCTRootView 相交的面积**，通过「暴露面积比例」这个指标，判定元素有百分之多少暴露在视口内，从而判定它曝光。
+
+问题来了：在使用过程中，发现该组件在某些情况下会出现误报的情况。
+
+## 三、问题表现
 
 我们有一个横向滑动列表（结构见下方例子），每个元素都套了一个 IntersectionObserverView，用于曝光埋点。
 
@@ -26,13 +37,13 @@ React Native 官方文档在[如何优化 FlatList 性能](https://reactnative.d
 const CustomComponent = ({ item }) => {
     return (
         <IntersectionObserverView>
-            <Text>{item}</Text>
+            <Book>{item}</Book>
         </IntersectionObserverView>
     );
 };
 
 const App = () => {
-    const data = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+    const data = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7'];
 
     return (
         <FlatList
@@ -52,15 +63,55 @@ const App = () => {
 
 **第 4 个及它之后的元素，总是会上报曝光，而且曝光率是 100%**
 
-数据分析师提出添加滑动埋点验证用户侧是否真的如此，我们通过 `onScrollBeginDrag` 添加埋点后发现: **上述问题是我们的 bug，大多数用户根本没有滑动，更不要说曝光后面的元素了。**
+![](https://cjpark-1304138896.cos.ap-guangzhou.myqcloud.com/blog_img/202504171339518.png)
 
-## 分析
+到这里，数据分析师们就不乐意了：你这上报都是错的，我要怎么统计！抓狂！😤
+
+于是他们提出: 再补充一个**滑动动作埋点**，简单验证一下，如果滑动的 UV 远远少于后面书本的曝光 UV，就说明曝光是有问题的。
+
+我们通过 `onScrollBeginDrag` 添加埋点后发现: 
+
+**上述问题是我们的 bug，大多数用户根本没有滑动，更不要说曝光后面的元素了。**
+
+那就要查一查了。
+
+## 四、分析排查
+
+通过一波打日志 debug，发现后面那几个视觉不可见的元素， 计算出来 **「与视口相交的面积比」** 竟然是 1，说明计算面积部分的代码有问题。
+
+我 Review 了一下计算逻辑，没有看到明显的漏洞，说明是 `left/right/top/bottom` 四个测量值有问题。
+
+而这四个值是谁给出的呢？是 RN 官方提供的 `measure` API 给出的。
+
+这就要看看源码里的实现了。
 
 ### measure 的具体实现
 
-measure 方法是 RCTUIManager 提供并暴露的方法，从下图容易看出，其原理是通过 `view.superview` 向上找到最顶部（最多到达 RCTRootView 结束）的祖先 view，然后返回 target 在祖先 view 坐标下的 bounds。
+measure 方法是 `RCTUIManager` 提供并暴露的方法，我们到 `RCTUIManager.m` 看看实现。
 
 ![](https://cjpark-1304138896.cos.ap-guangzhou.myqcloud.com/blog_img/202503191132453.png)
+
+容易看出，其原理是通过 `view.superview` 向上找到最顶部（最多到达 RCTRootView 结束）的祖先 view，然后返回 target 在祖先 view 坐标下的 bounds。
+
+![measure 原理示意图](https://cjpark-1304138896.cos.ap-guangzhou.myqcloud.com/blog_img/202504171356410.png)
+
+看起来似乎没啥问题，但是这几行代码让我联想到了 `removeClippedSubView`
+
+```objc
+UIView *rootView = view;
+while (rootView.superview && ![rootView isReactRootView]) {
+    rootView = rootView.superview;
+}
+```
+
+如果，我是说如果，target 一直往上找，到达的终点不是 RCTRootView，是不是就有可能出现测量不准的情况？
+
+例如某一坨节点被从整个 View 树上卸载了下来。
+
+![](https://cjpark-1304138896.cos.ap-guangzhou.myqcloud.com/blog_img/202504171401513.png)
+
+
+既然有这个疑问，再来看看 removeClippedSubView 的实现。
 
 
 ### removeClippedSubview 的逻辑
@@ -84,17 +135,19 @@ measure 方法是 RCTUIManager 提供并暴露的方法，从下图容易看出�
 
 这样一来，measure 得到的 bounds，就**不是** target 相对于 RCTRootView 的 bounds，那么 IntersectionObserverView 内部逻辑计算得到的相交比例就是错误的。
 
+![](https://cjpark-1304138896.cos.ap-guangzhou.myqcloud.com/blog_img/202504171410061.png)
+
 **有一种很典型的情况:**
 
 假设 measure 方法在 target 往上爬的时候，只爬了一层就停下来了，那么此时通过返回的 bounds 计算出来的相交比例，很有可能接近于 1，此时就会被误判为「target 和根视图的相交比例很高，可以认为 target 几乎整个完全暴露在视图内了」，从而误认为target 曝光，然后上报错误的数据。
 
-## 问题的本质
+## 五、问题的本质
 
 - 对列表设置 removeClippedSubview 属性，导致列表中不可见的 view 被从 superview 上卸载
 - measure 得到了**不是相对于 RCTRootView 的** bounds，导致相交比例是错的，并误认为曝光 
 - 从 measure 的返回值中，我们无法得知最终测量的相对祖先到底是不是 RCTRootView
 
-## 解决方法
+## 六、解决方法
 
 ### (临时) 使用 `measureInWindow` 替代
 
