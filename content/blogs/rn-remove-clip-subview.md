@@ -1,5 +1,5 @@
 ---
-title: React Native 列表 removeClippedSubview 的坑
+title: 列表性能优化居然会导致曝光错误？RN FlatList removeClippedSubview 踩坑实录
 time: 2025-01-22
 ---
 
@@ -219,3 +219,26 @@ measureInWindow 的逻辑和 measure 有点不同
     });
 }
 ```
+## 七、更优雅的解决方案参考
+
+ByteDance 开源了它的内部跨端框架 [Lynx](https://lynxjs.org/zh/)
+
+该框架原生支持简单曝光能力和自定义曝光能力 [IntersectionObserver API](https://lynxjs.org/zh/api/lynx-api/intersection-observer.html)
+
+![](https://cjpark-1304138896.cos.ap-guangzhou.myqcloud.com/blog_img/202505082053977.png)
+
+可以看到，它提供的几个 API 中，可以指定 measure 时的参照节点：
+- `IntersectionObserver.relativeTo()`
+- `IntersectionObserver.relativeToViewport()`
+- `IntersectionObserver.relativeToScreen()`
+- `IntersectionObserver.observe()`
+- `IntersectionObserver.disconnect()`
+
+这样设计刚好解决了本文发现的痛点，API 既简单又能满足业务的常见需求。
+
+进一步看看源码, iOS 的实现，基本就是 RN measure API 的升级版，对 root 节点的身份进行了更详尽的判断：
+
+安卓的实现在 `LynxIntersectionObserver.java`，逻辑和 iOS 的几乎完全一样，这里就不贴代码了。
+
+![](https://cjpark-1304138896.cos.ap-guangzhou.myqcloud.com/blog_img/202505082051055.png)
+
