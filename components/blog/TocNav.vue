@@ -29,4 +29,9 @@ const props = withDefaults(defineProps<TocNavProps>(), {
 </script>
 
 <style lang="scss" scoped>
+.tocnav {
+   max-height: 60vh;
+   overflow-y: scroll;
+   overflow-x: hidden;
+}
 </style>
