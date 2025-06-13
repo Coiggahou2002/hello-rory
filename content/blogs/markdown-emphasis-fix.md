@@ -1,9 +1,9 @@
 ---
-title: 一种 markdown-it 加粗识别失效 case 研究与修复
+title: 解决了一个豆包还没解决的 Markdown 渲染问题
 time: 2025-03-11 13:00
 ---
 
-# 一种 markdown-it 加粗识别失效 case 研究与修复
+# 解决了一个豆包还没解决的 Markdown 渲染问题
 
 ## 背景
 在近期公司业务开发中，需要对大模型生成的 Markdown 文本进行解析并在移动端 WebView 上渲染，我们遇到了一个 Markdown 渲染问题：
@@ -30,6 +30,17 @@ AI 生成的Markdown文本中，部分加粗内容无法正确解析，导致原
 
 ![](https://cjpark-1304138896.cos.ap-guangzhou.myqcloud.com/blog_img/202503111137645.png)
 
+当时查这个问题的时候，大概是 3-11 左右，当时 DeepSeek 官网也有这个问题，我一想，吹牛逼的机会这不就来了吗，马上查一下😂
+
+![](https://cjpark-1304138896.cos.ap-guangzhou.myqcloud.com/blog_img/202506131136290.png)
+
+:::warning{title=补充}
+截至码字的今天（6 月 13 日），豆包也还没有解决这个问题，我们构造一个问题就可以轻松复现：
+![](https://cjpark-1304138896.cos.ap-guangzhou.myqcloud.com/blog_img/202506131135154.png)
+
+![](https://cjpark-1304138896.cos.ap-guangzhou.myqcloud.com/blog_img/202506131136258.png)
+
+:::
 
 ## 原因分析
 
