@@ -1,12 +1,10 @@
 ---
-title: 借助 runes.js 对 emoji 原理一探究竟
+title: emoji 的长度到底是多少？UTF-16 下 emoji 字符串原理探究 
 author: rorycai
 time: 2025-07-16
 ---
 
-# 结合runes.js源码深入探究emoji
-
-## 0x00 前言
+## 0 前言
 在日常前端开发过程中，我们经常会与 emoji 打交道。相信刚入门的新手们或多或少会遇到类似这样的问题：
 
 - 使用`split`方法拆开含有 emoji 的字符串，拆坏了
@@ -20,13 +18,13 @@ time: 2025-07-16
 2. 在有切分需求（例如逐字 fade-in 动画）时，正确地切开含 emoji 的字符串
 3. 正确计算含 emoji 字符串的长度。
 
-**太长不看版**：倘若你无暇深入探究原理，[runes.js](https://github.com/dotcypress/runes) 或许能成为你的得力助手，直接引入源码 or 安装后直接使用即可，该库导出了两个函数 `runes` 和 `substr` 用于对含 emoji 的字符串执行正确的切分、取子串操作。未压缩的源代码只有 160 行左右。
+**太长不看版**：倘若你无暇深入探究原理，可以直接使用 [runes.js](https://github.com/dotcypress/runes) ，直接引入源码 or 安装后直接使用即可，该库导出了两个函数 `runes` 和 `substr` 用于对含 emoji 的字符串执行正确的切分、取子串操作。未压缩的源代码只有 160 行左右。
 
 但如果我们想要知其所以然，就有必要深入研究一下，笔者在研究 `runes.js` 的源码过程中，顺带了解了一些 emoji 的常见模式，其实还挺有趣的，给各位看官介绍一下。
 
 ---
 
-## 0x01 前置知识
+## 1 前置知识
 
 先来一波字符编码的前置知识补充，熟悉的大佬可以直接跳过。
 
@@ -203,7 +201,7 @@ function codePointFromSurrogatePair (pair: string): string {
 
 ---
 
-## 0x02 常见的 emoji 类型及其组合模式
+## 2 常见的 emoji 类型及其组合模式
 
 其实 emoji 并没有那么简单，里面含有很多组合的逻辑。
 
@@ -214,13 +212,18 @@ function codePointFromSurrogatePair (pair: string): string {
 |-------|-------------|---------------|
 | 😀    | U+1F600     | 0xD83D,0xDE00 |
 | 🤪    | U+1F92A     | 0xD83E,0xDD2A |
-| 🦊    | U+1F98A     |               |
-| 🚀    | U+1F680     |               |
+| 🦊    | U+1F98A     | 0xD83E,0xDD8A              |
+| 🚀    | U+1F680     | 0xD83D,0xDE80             |
 | ...   | ...         | ...           |
 
+
 ```js
-// 测试小函数
-const p = (str) => { return str.split('').map(s => s.charCodeAt(0).toString(16)) }
+// 如果你想在浏览器玩玩，这里提供了一些示例
+String.fromCodePoint(0x1F98A); // 🦊
+String.fromCharCode(0xD83E,0xDD8A); // 🦊
+'🦊'.charCodeAt(0).toString(16); // D83E
+'🦊'.charCodeAt(1).toString(16); // DD8A
+'🦊'.codePointAt(0).toString(16); // 1F98A
 ```
 
 > 注：这里 U+1F600 和 0x1F600 只是两种习惯的表示方法，表示的都是 Unicode 码点
@@ -283,11 +286,17 @@ Unicode 的基本平面中，`0xFE00` 到 `0xFE0F` 范围的字符，都属于�
 | ⬆        | `U+2B06` | ⬆️️️            | `U+2B06` `U+FE0F` |
 | ☑        | `U+2611` | ️ ☑️️️          | `U+2611` `U+FE0F` |
 
+### 按键组合模式
+
+我们平时经常会用到的 1️⃣ 2️⃣ 3️⃣ 这类按键 emoji 就属于这个系列，它是由一个基础码点+变体选择器+框选码点来组成的。
+
+![image.png](https://km.woa.com/asset/000100022507000ad29432d3d4438f01?height=672&width=2340)
+
 ### 国旗组合模式
 
 国旗 emoji 的玩法稍微特殊一点，但规则也比较简单：通常是由两个区域指示符号字母组成，比如“🇨🇳”代表中国国旗，其实他是 C + N 两面旗（两个码点）组合起来表示的。
 
-![](https://cjpark-1304138896.cos.ap-guangzhou.myqcloud.com/blog_img/202507161525750.png)
+![](https://cjpark-1304138896.cos.ap-guangzhou.myqcloud.com/blog_img/202507182013775.png)
 
 | Part 1 | 码点      | Part 2 | 码点      | 组合 | 码点              |
 | ------ | --------- | ------ | --------- | ---- | ----------------- |
@@ -394,6 +403,25 @@ Unicode 的基本平面中，`0xFE00` 到 `0xFE0F` 范围的字符，都属于�
    💘 = ❤️ + U+200D + 🏹
    ```
 
+女人和女人亲嘴
+```
+👩‍❤️‍💋‍👩 = 👩 + U+200D + ❤️ + U+200D + 💋 + U+200D + 👩
+```
+
+两个深色皮肤女人亲嘴
+```
+👩🏽‍❤️‍💋‍👩🏽 U+1F469 U+1F3FD U+200D U+2764 U+FE0F U+200D U+1F48B U+200D U+1F469 U+1F3FD
+```
+
+两边肤色不一样
+```
+👩🏼‍❤️‍💋‍👩🏾' U+1F469 U+1F3FC U+200D U+2764 U+FE0F U+200D U+1F48B U+200D U+1F469 U+1F3FE
+```
+
+有兴趣的朋友可以算算最后这个不同肤色女人亲嘴的 emoji 的长度是多少，哈哈。
+
+![](https://cjpark-1304138896.cos.ap-guangzhou.myqcloud.com/blog_img/202507182013596.png)
+
 ### 这么多组合，怎么处理呢？
 
 上面说的这些模式，极大地丰富了 emoji 的表现力，但也给字符串处理带来了挑战。当你尝试对含 emoji 的字符串进行 `split` 拆分、计算长度或取子串操作时，如果不考虑这些特殊结构，容易导致一些问题：
@@ -419,7 +447,7 @@ Unicode 的基本平面中，`0xFE00` 到 `0xFE0F` 范围的字符，都属于�
 ---
 
 
-## 0x03 runes.js 源码解读
+## 3 runes.js 源码解读
 
 [runes](https://github.com/dotcypress/runes)) 是一个专门用于处理含有 emoji 和其他 Unicode 字符的 JavaScript 字符串分割库。在 JavaScript 中，默认的`String.split('')`方法无法正确处理 emoji 和其他非 BMP(Basic Multilingual Plane) 字符，runes 库解决了这个问题。
 
@@ -545,7 +573,7 @@ function nextUnits(i, string) {
 - `isZeroWidthJoiner` 就是判断当前码点是不是 `0x200D`
 - `isFitzpatrickModifier` 判断是不是肤色选择器，其实就五个，`0x1f3fb` 到 `0x1f3ff`
 
-## 总结
+## 4 总结
 
 在这篇文章中，我们深入探究了emoji的工作原理及其在前端开发中的处理方法。首先了解了Unicode编码的基础概念，包括码点(Code Point)和码元(Code Unit)，以及UTF-16编码如何通过代理对(Surrogate Pairs)表示超出基本平面的字符。
 
@@ -562,7 +590,7 @@ function nextUnits(i, string) {
 
 通过使用runes.js或理解其背后的原理，我们可以在前端开发中正确地显示、计算和操作含有emoji的字符串，避免出现乱码、长度计算错误等问题，从而提升用户体验。
 
-## 参考 & 工具网站
+## 5 函数 & 工具参考
 
 查询 emoji 及其对应的码点：[emojipedia](https://emojipedia.org/flag-brazil#technical)
 
